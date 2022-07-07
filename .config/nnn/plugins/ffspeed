@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+sel=${NNN_SEL:-${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.selection}
+
+clear
+printf "Enter the speed: "
+read -r speed
+printf "Enter the number of parallel tasks: "
+read -r nthreads
+v_speed=$(bc <<< "scale=10; (1/$speed)")
+a_speed=$(bc <<< "scale=10; ($speed/1)")
+o_speed=$(bc <<< "scale=2; ($speed/1)")
+
+dry_run() {
+	filename=$(basename -- "$0")
+	extension="${filename##*.}"
+	filename="${filename%.*}"
+	output=$3
+	output="$PWD/${filename}_x$(echo $output | sed 's/\.\?0*$//g').mp4"
+	printf "=> $output\n"
+}
+export -f dry_run
+xargs -P $nthreads -0 -a "$sel" -I % bash -c 'dry_run "$@"' % $v_speed $a_speed $o_speed
+
+printf "press y to continue..."
+read -r dummy
+[ "$dummy" != "y" ] && exit 1
+
+ffspeed_func() {
+	filename=$(basename -- "$0")
+	extension="${filename##*.}"
+	filename="${filename%.*}"
+	output=$3
+	output="$PWD/${filename}_x$(echo $output | sed 's/\.\?0*$//g').mp4"
+	ffmpeg -i "$0" \
+		-vcodec h264_nvenc \
+		-filter_complex "[0:v]setpts=$1*PTS[v];[0:a]atempo=$2[a]" \
+		-map "[v]" -map "[a]" \
+		"$output"
+}
+export -f ffspeed_func
+xargs -P $nthreads -0 -a "$sel" -I % bash -c 'ffspeed_func "$@"' % $v_speed $a_speed $o_speed
+
+printf "Done!"
+
+# Clear selection
+if [ -p "$NNN_PIPE" ]; then
+    printf "-" > "$NNN_PIPE"
+fi

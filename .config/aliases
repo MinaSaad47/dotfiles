@@ -1,0 +1,13 @@
+alias rs='rsync -avhP  --info=progress2 '
+alias mv='mv -v'
+alias cp='cp -v'
+alias v='nvim '
+alias l='lsd'
+alias ls='lsd -lh'
+alias ll='lsd -lha'
+alias htop='htop -t'
+alias pyuic5='python3 -m PyQt5.uic.pyuic'
+alias ytv="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --progress-template 'download:[%(info.title)s]' --progress --embed-chapters --embed-metadata --embed-subs --embed-thumbnail -o '%(title)s.%(ext)s' --no-playlist"
+alias yta="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --progress-template 'download:[%(info.title)s]' --progress --embed-chapters --embed-metadata --embed-subs --embed-thumbnail -f "bestaudio" -x --audio-format mp3 -o '%(title)s.%(ext)s' --no-playlist"
+alias ytp="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --progress-template 'download:[%(info.playlist_index)s-%(info.title)s]' --progress --embed-chapters --embed-metadata --embed-subs --embed-thumbnail -o '%(playlist_index)s-%(title)s.%(ext)s' --yes-playlist"
+alias pm='podman'
