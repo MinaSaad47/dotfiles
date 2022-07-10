@@ -56,13 +56,13 @@ source $HOME/.config/aliases
 
 
 # Load syntax highlighting
-if [[ -z /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] then
+if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-if [[ -z /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] then
+if [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
