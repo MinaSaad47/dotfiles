@@ -20,8 +20,13 @@ fi
 if [ -d $HOME/.cargo/bin/ ]; then
 	export PATH="$PATH:$HOME/.cargo/bin/"
 fi
+
 if [ -d $HOME/.local/share/flutter/bin ]; then
 	export PATH="$PATH:$HOME/.local/share/flutter/bin"
+fi
+
+if [ -d $HOME/.pub-cache/bin ]; then
+    export PATH="$PATH:$HOME/.pub-cache/bin"
 fi
 
 export EDITOR=nvim
