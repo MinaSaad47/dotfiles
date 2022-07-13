@@ -29,6 +29,11 @@ if [ -d $HOME/.pub-cache/bin ]; then
     export PATH="$PATH:$HOME/.pub-cache/bin"
 fi
 
+if [ -d $HOME/.local/share/jdk/bin ]; then
+    export PATH="$PATH:$HOME/.local/share/jdk/bin"
+    export JAVA_HOME="$HOME/.local/share/jdk"
+fi
+
 export EDITOR=nvim
 
 NPM_PACKAGES="${HOME}/.npm-packages"
