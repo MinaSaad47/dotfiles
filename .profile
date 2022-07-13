@@ -21,6 +21,12 @@ if [ -d $HOME/.cargo/bin/ ]; then
 	export PATH="$PATH:$HOME/.cargo/bin/"
 fi
 
+
+if [ -d $HOME/.local/share/android/ ]; then
+    export ANDROID_SDK_ROOT="$HOME/.local/share/android/sdk"
+	export PATH="$PATH:$HOME/.local/opt/android-studio/bin"
+fi
+
 if [ -d $HOME/.local/share/flutter/bin ]; then
 	export PATH="$PATH:$HOME/.local/share/flutter/bin"
 fi
