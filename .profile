@@ -22,9 +22,14 @@ if [ -d $HOME/.cargo/bin/ ]; then
 fi
 
 
-if [ -d $HOME/.local/share/android/ ]; then
-    export ANDROID_SDK_ROOT="$HOME/.local/share/android/sdk"
-	export PATH="$PATH:$HOME/.local/opt/android-studio/bin"
+if [ -d $HOME/.local/opt/Android ]; then
+    export JAVA_HOME="$HOME/.local/opt/Android/android-studio/jre"
+    export PATH="$PATH:$HOME/.local/opt/Android/android-studio/jre/bin"
+    export ANDROID_HOME="$HOME/.local/opt/Android/Sdk"
+    export ANDROID_SDK_ROOT="$HOME/.local/opt/Android/Sdk"
+    export ANDROID_USER_HOME="$HOME/.local/opt/Android/.android"
+    export PATH="$PATH:$HOME/.local/opt/Android/android-studio/bin"
+    export PATH="$PATH:$HOME/.local/opt/Android/Sdk/tools/bin"
 fi
 
 if [ -d $HOME/.local/share/flutter/bin ]; then
@@ -33,11 +38,6 @@ fi
 
 if [ -d $HOME/.pub-cache/bin ]; then
     export PATH="$PATH:$HOME/.pub-cache/bin"
-fi
-
-if [ -d $HOME/.local/share/jdk/bin ]; then
-    export PATH="$PATH:$HOME/.local/share/jdk/bin"
-    export JAVA_HOME="$HOME/.local/share/jdk"
 fi
 
 export EDITOR=nvim
