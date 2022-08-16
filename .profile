@@ -1,6 +1,10 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+if [ -d $HOME/.local/share/flatpak/exports/bin/ ]; then
+    export PATH="$PATH:$HOME/.local/share/flatpak/exports/bin"
+fi
+
 if [ -d $HOME/.local/bin ]; then
 	export PATH="$PATH:$HOME/.local/bin"
 fi
