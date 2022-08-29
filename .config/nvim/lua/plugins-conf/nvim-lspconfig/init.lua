@@ -1,12 +1,12 @@
-local status_ok, _ = pcall(require, "lspconfig")
+local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then
     print("[ERROR] requiring nvim-lspconfig")
     return
 end
 
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+local status_ok, mason = pcall(require, "mason")
 if not status_ok then
-    print("[ERROR] requiring nvim-lsp-installer")
+    print("[ERROR] requiring mason")
     return
 end
 
@@ -40,13 +40,32 @@ if status_ok then
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 end
 
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities
+local opts = {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+mason.setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
     }
-    server:setup(opts)
-end)
+})
+
+local status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
+if status_ok then
+    mason_lspconfig.setup()
+    mason_lspconfig.setup_handlers {
+        function(server)
+            lspconfig[server].setup(opts)
+        end
+    }
+end
+
+
 
 
 vim.diagnostic.config({

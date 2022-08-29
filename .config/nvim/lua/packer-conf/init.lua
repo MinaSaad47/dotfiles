@@ -46,7 +46,8 @@ return require('packer').startup(function()
     use 'nvim-lualine/lualine.nvim'
     -- language server
     use {
-        'williamboman/nvim-lsp-installer',
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lsp-signature-help',
