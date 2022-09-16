@@ -25,7 +25,7 @@ set.cursorline = true
 
 set.hidden = true
 
-set.cmdheight = 0
+set.cmdheight = 1
 set.laststatus = 3
 
 set.mouse='a'
