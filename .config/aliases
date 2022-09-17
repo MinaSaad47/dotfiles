@@ -11,3 +11,4 @@ alias ytv="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --pro
 alias yta="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --progress-template 'download:[%(info.title)s]' --progress --embed-chapters --embed-metadata --embed-subs --embed-thumbnail -f "bestaudio" -x --audio-format mp3 -o '%(title)s.%(ext)s' --no-playlist"
 alias ytp="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --progress-template 'download:[%(info.playlist_index)s-%(info.title)s]' --progress --embed-chapters --embed-metadata --embed-subs --embed-thumbnail -o '%(playlist_index)s-%(title)s.%(ext)s' --yes-playlist"
 alias pm='podman'
+alias pmc='podman-compose'
