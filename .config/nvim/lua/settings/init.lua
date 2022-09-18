@@ -25,12 +25,7 @@ set.cursorline = true
 
 set.hidden = true
 
-<<<<<<< Updated upstream
 set.cmdheight = 1
-||||||| Stash base
-set.cmdheight = 0
-=======
->>>>>>> Stashed changes
 set.laststatus = 3
 
 set.mouse='a'
