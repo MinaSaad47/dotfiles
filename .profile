@@ -44,10 +44,15 @@ if [ -d $HOME/.pub-cache/bin ]; then
     export PATH="$PATH:$HOME/.pub-cache/bin"
 fi
 
+export NPM_PACKAGES="$HOME/.local/share/npm-packages"
+
+if [ -d $NPM_PACKAGES ]; then
+    export PATH="$PATH:$NPM_PACKAGES/bin"
+    # export MANPATH="$(manpath):$NPM_PACKAGES/share/man"
+    export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+fi
+
 export EDITOR=nvim
-
-NPM_PACKAGES="${HOME}/.npm-packages"
-
 export NNN_PLUG='s:ffspeed;f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview;r:rsynccp;'
 BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
