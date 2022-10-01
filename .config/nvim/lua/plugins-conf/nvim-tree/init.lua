@@ -1,3 +1,1 @@
-require'nvim-tree'.setup {
-    -- todo
-}
+require 'nvim-tree'.setup {}

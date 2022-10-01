@@ -10,6 +10,9 @@ if not status_ok then
     return
 end
 
+-- For `Enable Diagnostic in hover window`
+vim.o.updatetime = 250
+
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -31,7 +34,23 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
+
+    -- Enable Diagnostic in hover window
+    vim.api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        callback = function()
+            local opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, opts)
+        end
+    })
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -80,4 +99,34 @@ local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- Enable Inlay Hints
+local status_ok, lsp_inlayhints = pcall(require, "lsp-inlayhints")
+if status_ok then
+    lsp_inlayhints.setup()
+    vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+    vim.api.nvim_create_autocmd("LspAttach", {
+        group = "LspAttach_inlayhints",
+        callback = function(args)
+            if not (args.data and args.data.client_id) then
+                return
+            end
+
+            local bufnr = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            lsp_inlayhints.on_attach(client, bufnr)
+
+            -- keybinding
+            local bufopts = { noremap = true, silent = true, buffer = bufnr }
+            vim.keymap.set('n', '<C-i>', lsp_inlayhints.toggle, bufopts)
+        end,
+    })
+end
+
+
+-- Lsp Progress Indicator
+local status_ok, fidget = pcall(require, "fidget")
+if status_ok then
+    fidget.setup()
 end

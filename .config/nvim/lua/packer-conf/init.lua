@@ -49,6 +49,7 @@ return require('packer').startup(function()
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
+        'lvimuser/lsp-inlayhints.nvim',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lsp-signature-help',
         'hrsh7th/cmp-buffer',
@@ -58,6 +59,8 @@ return require('packer').startup(function()
         -- snipets
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
+        -- progress
+        'j-hui/fidget.nvim'
     }
     -- autopair
     use 'windwp/nvim-autopairs'

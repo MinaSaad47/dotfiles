@@ -74,7 +74,7 @@ bufferline.setup {
 
 local status_ok, nvim_tree_events = pcall(require, 'nvim-tree.events')
 if status_ok then
-    local bufferline_state = require('bufferline.state')
+    local bufferline_state = require('bufferline.api')
 
     nvim_tree_events.on_tree_open(function()
         bufferline_state.set_offset(31, "File Tree")
