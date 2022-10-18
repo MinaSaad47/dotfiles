@@ -60,7 +60,9 @@ return require('packer').startup(function()
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
         -- progress
-        'j-hui/fidget.nvim'
+        'j-hui/fidget.nvim',
+        -- lspsaga
+        { 'glepnir/lspsaga.nvim', branch = 'main' }
     }
     -- autopair
     use 'windwp/nvim-autopairs'
@@ -80,7 +82,7 @@ return require('packer').startup(function()
     -- barbar
     use 'romgrk/barbar.nvim'
     -- toggleterm
-    use { 'akinsho/toggleterm.nvim', tag = 'v1.*' }
+    use { 'akinsho/toggleterm.nvim', tag = '*' }
 
     if packer_bootstrap then
         require('packer').sync()

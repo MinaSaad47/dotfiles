@@ -144,6 +144,11 @@ _G.packer_plugins = {
     path = "/home/ms47/.local/share/nvim/site/pack/packer/start/lsp-inlayhints.nvim",
     url = "https://github.com/lvimuser/lsp-inlayhints.nvim"
   },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/home/ms47/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/ms47/.local/share/nvim/site/pack/packer/start/lualine.nvim",
