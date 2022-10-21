@@ -1,11 +1,11 @@
-local status_ok, treesitter = pcall(require, 'nvim-treesitter.configs')
+local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
-    vim.notify('[ERROR] requiring nvim-treesitter')
+  vim.notify "[ERROR] requiring nvim-treesitter"
 end
 
 treesitter.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { 'rust', 'go', 'c', 'cpp' },
+  ensure_installed = { "rust", "go", "c", "cpp" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -21,8 +21,7 @@ treesitter.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { 'dart' },
-
+    disable = { "dart" },
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -42,13 +41,13 @@ treesitter.setup {
   },
 
   indent = {
-    enable = true
-  }
+    enable = true,
+  },
 }
 
 require("nvim-treesitter.configs").setup {
   highlight = {
-      -- ...
+    -- ...
   },
   -- ...
   rainbow = {
@@ -58,11 +57,11 @@ require("nvim-treesitter.configs").setup {
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
-  }
+  },
 }
 
 local set = vim.opt
 
 set.foldlevel = 20
-set.foldmethod = 'expr'
-set.foldexpr = 'nvim_treesitter#foldexpr'
+set.foldmethod = "expr"
+set.foldexpr = "nvim_treesitter#foldexpr"

@@ -28,5 +28,5 @@ set.hidden = true
 set.cmdheight = 1
 set.laststatus = 3
 
-set.mouse='a'
-set.clipboard =  'unnamedplus'
+set.mouse = "a"
+set.clipboard = "unnamedplus"

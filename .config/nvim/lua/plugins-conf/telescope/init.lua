@@ -1,6 +1,6 @@
-local status_ok, telescope = pcall(require, 'telescope')
+local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-    vim.notify('[ERROR] requiring telescope')
+  vim.notify "[ERROR] requiring telescope"
 end
 
 telescope.setup {}
