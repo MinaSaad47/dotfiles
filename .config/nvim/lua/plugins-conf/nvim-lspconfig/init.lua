@@ -4,26 +4,35 @@ if not status_ok then
   return
 end
 
-local mason_status, mason = pcall(require, "mason")
-if not mason_status then
-  print "[ERROR] requiring mason"
-  return
-end
+-- Format on save
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-local on_attach = function(_, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+local on_attach = function(client, bufnr)
+  -- Format on save
+  if client.supports_method "textDocument/formatting" then
+    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -37,6 +46,12 @@ local opts = {
   on_attach = on_attach,
 }
 -- Mason
+local mason_status, mason = pcall(require, "mason")
+if not mason_status then
+  print "[ERROR] requiring mason"
+  return
+end
+
 mason.setup {
   ui = {
     icons = {
