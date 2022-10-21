@@ -10,18 +10,6 @@ if not mason_status then
   return
 end
 
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format {
-    filter = function(client)
-      return client.name == "null-ls"
-    end,
-    bufnr = bufnr,
-    sync = false,
-  }
-end
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -35,29 +23,6 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
-end
-
-local on_attach_formatting = function(client, bufnr)
-  if client.supports_method "textDocument/formatting" then
-    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
-      end,
-    })
-  end
-  on_attach(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set("n", "<leader>f", function()
-    lsp_formatting(bufnr)
-  end, bufopts)
-end
-
-local on_attach_generic = function(client, bufnr)
-  on_attach(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
 end
 
@@ -68,8 +33,8 @@ if cmp_nvim_lua_status then
 end
 
 local opts = {
-  on_attach = on_attach_formatting,
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 -- Mason
 mason.setup {
@@ -95,7 +60,6 @@ end
 
 -- Manual Setup
 lspconfig.sumneko_lua.setup {
-  on_attach = on_attach_formatting,
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -104,10 +68,7 @@ lspconfig.sumneko_lua.setup {
       },
     },
   },
-}
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach_generic,
-  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 -- Enable Inlay Hints

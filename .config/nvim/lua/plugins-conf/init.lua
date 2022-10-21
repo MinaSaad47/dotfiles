@@ -1,6 +1,6 @@
 require "plugins-conf/nvim-tree"
-require "plugins-conf/null-ls"
 require "plugins-conf/nvim-lspconfig"
+require "plugins-conf/null-ls"
 require "plugins-conf/nvim-cmp"
 require "plugins-conf/lualine"
 require "plugins-conf/nvim-treesetter"
