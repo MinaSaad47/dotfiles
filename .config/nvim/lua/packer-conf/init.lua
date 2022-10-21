@@ -62,7 +62,9 @@ return require('packer').startup(function()
         -- progress
         'j-hui/fidget.nvim',
         -- lspsaga
-        { 'glepnir/lspsaga.nvim', branch = 'main' }
+        { 'glepnir/lspsaga.nvim', branch = 'main' },
+        -- null-ls
+        'jose-elias-alvarez/null-ls.nvim'
     }
     -- autopair
     use 'windwp/nvim-autopairs'
