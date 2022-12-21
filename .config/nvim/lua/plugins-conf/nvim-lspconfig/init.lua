@@ -287,3 +287,9 @@ if lspsaga_status then
   -- close floaterm
   keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 end
+
+-- neodev
+local status_ok, neodev = pcall(require, "neodev")
+if status_ok then
+  neodev.setup()
+end

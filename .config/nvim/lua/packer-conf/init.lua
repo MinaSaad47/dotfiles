@@ -1,17 +1,9 @@
-local fn = vim.fn
-
 -- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local is_bootstrap = false
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  is_bootstrap = true
+  vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
   vim.cmd [[packadd packer.nvim]]
 end
 
@@ -30,13 +22,54 @@ packer.init {
   },
 }
 
-return require("packer").startup(function()
+packer.startup(function()
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
-  -- plenary (dependency for other plugins)
-  use "nvim-lua/plenary.nvim"
-  -- colorscheme
-  use "ellisonleao/gruvbox.nvim"
+
+  use {
+    "neovim/nvim-lspconfig",
+    requires = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+
+      -- lsp progress status
+      "j-hui/fidget.nvim",
+
+      -- inlayhints
+      "lvimuser/lsp-inlayhints.nvim",
+    },
+  }
+
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "L3MON4D3/LuaSnip",
+
+      -- better ui
+      { "glepnir/lspsaga.nvim", branch = "main" },
+    },
+  }
+
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      pcall(require("nvim-treesitter.install").update { with_sync = true })
+    end,
+    requires = {
+      "p00f/nvim-ts-rainbow",
+    },
+  }
+  use { -- Additional text objects via treesitter
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+  }
+
   -- file explorer
   use "kyazdani42/nvim-tree.lua"
   -- ui icons
@@ -45,44 +78,55 @@ return require("packer").startup(function()
   use "nvim-lualine/lualine.nvim"
   -- language server
   use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-    "lvimuser/lsp-inlayhints.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    -- snipets
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    -- progress
-    "j-hui/fidget.nvim",
-    -- lspsaga
-    { "glepnir/lspsaga.nvim", branch = "main" },
-    -- null-ls
     "jose-elias-alvarez/null-ls.nvim",
   }
+
+  use "lewis6991/gitsigns.nvim"
+
+  -- telescope
+  use {
+    "nvim-telescope/telescope.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  }
+
   -- autopair
   use "windwp/nvim-autopairs"
-  -- tree setter
-  use { "nvim-treesitter/nvim-treesitter", "p00f/nvim-ts-rainbow", run = ":TSUpdate" }
-  -- telescope
-  use "nvim-telescope/telescope.nvim"
-  -- gitsigns
-  use "lewis6991/gitsigns.nvim"
+
+  use "ellisonleao/gruvbox.nvim"
+  use "lukas-reineke/indent-blankline.nvim"
+  use "romgrk/barbar.nvim"
+
   -- flutter-tools
   use "akinsho/flutter-tools.nvim"
-  -- indentline
-  use "lukas-reineke/indent-blankline.nvim"
-  -- barbar
-  use "romgrk/barbar.nvim"
-  -- toggleterm
-  use { "akinsho/toggleterm.nvim", tag = "*" }
 
-  if packer_bootstrap then
+  if is_bootstrap then
     require("packer").sync()
   end
 end)
+
+if is_bootstrap then
+  print "=================================="
+  print "    Plugins are being installed"
+  print "    Wait until Packer completes,"
+  print "       then restart nvim"
+  print "=================================="
+  return
+end
+
+-- You'll need to restart nvim, and then it will work.
+if is_bootstrap then
+  print "=================================="
+  print "    Plugins are being installed"
+  print "    Wait until Packer completes,"
+  print "       then restart nvim"
+  print "=================================="
+  return
+end
+
+-- Automatically source and re-compile packer whenever you save this init.lua
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerCompile",
+  group = packer_group,
+  pattern = vim.fn.expand "$MYVIMRC",
+})

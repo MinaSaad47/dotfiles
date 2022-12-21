@@ -39,7 +39,7 @@ null_ls.setup {
     formatting.stylua,
     formatting.jq,
     formatting.prettierd,
-    diagnostics.eslint,
+    diagnostics.eslint_d,
   },
   on_attach = on_attach,
 }
