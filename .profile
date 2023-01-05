@@ -21,8 +21,8 @@ if [ -d $HOME/.local/share/scripts ]; then
 	export PATH="$PATH:$HOME/.local/share/scripts"
 fi
 
-if [ -d $HOME/.cargo/bin/ ]; then
-	export PATH="$PATH:$HOME/.cargo/bin/"
+if [ -d $HOME/.cargo/bin ]; then
+	export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
 
