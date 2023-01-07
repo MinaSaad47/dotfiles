@@ -1,7 +1,8 @@
 source $HOME/.profile
 
-# fish shell
-if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
+P_PROC="$(ps --no-header --pid=$PPID --format=comm)"
+if [[ $P_PROC != "fish" && $P_PROC != "sddm-helper" && -z ${BASH_EXECUTION_STRING} ]]
 then
+	SHELL='/usr/bin/fish'
 	exec fish
 fi
