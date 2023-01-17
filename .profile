@@ -1,6 +1,8 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+
 if [ -d $HOME/.local/share/flatpak/exports/bin/ ]; then
     export PATH="$PATH:$HOME/.local/share/flatpak/exports/bin"
 fi
@@ -43,6 +45,8 @@ fi
 if [ -d $HOME/.pub-cache/bin ]; then
     export PATH="$PATH:$HOME/.pub-cache/bin"
 fi
+
+export XDG_DATA_DIRS=$HOME/.nix-profile/share:$HOME/.share:"${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
 
 export NPM_PACKAGES="$HOME/.local/share/npm-packages"
 
