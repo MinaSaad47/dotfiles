@@ -13,3 +13,4 @@ alias ytp="yt-dlp -i -q --no-warnings --restrict-filenames --console-title --pro
 alias pm='podman'
 alias pmc='podman-compose'
 alias 7z-sfx='7z a -t7z -m0=lzma2 -mmt=on -mx9 -md=64m -mfb=64 -ms=64g -mqs=on -sccutf-8 -bb0 -bse0 -bsp2 -sfx'
+alias virsh='virsh -c qemu:///system'

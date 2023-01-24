@@ -27,6 +27,10 @@ if [ -d $HOME/.cargo/bin ]; then
 	export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
+if [ -d $HOME/.config/scripts ]; then
+	export PATH="$PATH:$HOME/.config/scripts"
+fi
+
 
 if [ -d $HOME/.local/opt/Android ]; then
     export JAVA_HOME="$HOME/.local/opt/Android/android-studio/jre"

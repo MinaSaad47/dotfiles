@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+INPUT=$1
+SPEED=$2
+
+
+v_speed=$(bc << EOF
+scale=10; (1/${SPEED})
+EOF
+)
+a_speed=$(bc << EOF
+scale=10; (${SPEED}/1)
+EOF
+)
+o_speed=$(bc << EOF
+scale=2; (${SPEED}/1)
+EOF
+)
+
+
+OUTPUT="${INPUT%.*}.x${o_speed}.mkv"
+
+with_hwaccel() {
+    echo "using hwaccel"
+    ffmpeg -i "${INPUT}" \
+        -vcodec h264_nvenc \
+        -filter_complex "[0:v]setpts=${v_speed}*PTS[v];[0:a]atempo=${a_speed}[a]" \
+        -map "[v]" -map "[a]" \
+        "${OUTPUT}"
+}
+
+without_hwaccel() {
+    echo "not using hwaccel"
+    ffmpeg -i "${INPUT}" \
+        -filter_complex "[0:v]setpts=${v_speed}*PTS[v];[0:a]atempo=${a_speed}[a]" \
+        -map "[v]" -map "[a]" \
+        "${OUTPUT}"
+}
+
+if command -v nvidia-smi &>/dev/null; then 
+    with_hwaccel 
+else
+    without_hwaccel
+fi
