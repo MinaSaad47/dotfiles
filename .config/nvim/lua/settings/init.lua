@@ -1,7 +1,4 @@
 local set = vim.opt
-local g = vim.g
-
-g.mapleader = " "
 
 set.expandtab = true
 set.shiftwidth = 4

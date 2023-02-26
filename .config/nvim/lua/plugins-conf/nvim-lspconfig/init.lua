@@ -65,7 +65,9 @@ mason.setup {
 -- Mason Lspconfig
 local mason_lspconfig_status, mason_lspconfig = pcall(require, "mason-lspconfig")
 if mason_lspconfig_status then
-  mason_lspconfig.setup()
+  mason_lspconfig.setup {
+    enensure_installed = { "lua_ls", "rust_analyzer", "clangd" },
+  }
   mason_lspconfig.setup_handlers {
     function(server)
       lspconfig[server].setup(opts)
@@ -74,7 +76,7 @@ if mason_lspconfig_status then
 end
 
 -- Manual Setup
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
