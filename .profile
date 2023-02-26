@@ -32,14 +32,15 @@ if [ -d $HOME/.config/scripts ]; then
 fi
 
 
-if [ -d $HOME/.local/opt/Android ]; then
-    export JAVA_HOME="$HOME/.local/opt/Android/android-studio/jre"
-    export PATH="$PATH:$HOME/.local/opt/Android/android-studio/jre/bin"
-    export ANDROID_HOME="$HOME/.local/opt/Android/Sdk"
-    export ANDROID_SDK_ROOT="$HOME/.local/opt/Android/Sdk"
-    export ANDROID_USER_HOME="$HOME/.local/opt/Android/.android"
-    export PATH="$PATH:$HOME/.local/opt/Android/android-studio/bin"
-    export PATH="$PATH:$HOME/.local/opt/Android/Sdk/tools/bin"
+if [ -d $HOME/.local/opt/android ]; then
+    export JAVA_HOME="$HOME/.local/opt/android/android-studio/jbr"
+    export PATH="$PATH:$HOME/.local/opt/android/android-studio/jbr/bin"
+    export ANDROID_HOME="$HOME/.local/opt/android/sdk"
+    export ANDROID_SDK_ROOT="$HOME/.local/opt/android/sdk"
+    export ANDROID_USER_HOME="$HOME/.local/opt/android/.android"
+    # export ANDROID_SDK_HOME="$HOME/.local/opt/android/.android"
+    export PATH="$PATH:$HOME/.local/opt/android/android-studio/bin"
+    export PATH="$PATH:$HOME/.local/opt/android/sdk/tools/bin"
 fi
 
 if [ -d $HOME/.local/share/flutter/bin ]; then
@@ -64,6 +65,9 @@ fi
 export EDITOR=nvim
 export VISUAL=nvim
 export MANPAGER='nvim +Man!'
+
+# virt
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 # nnn file manager
 export NNN_PLUG='s:ffspeed;f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview;r:rsynccp;'

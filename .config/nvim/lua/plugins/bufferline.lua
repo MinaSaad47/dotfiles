@@ -4,7 +4,7 @@ return {
     opts = {
         options = {
             saperator_style = "slope",
-            diagnostics = "nvim_lsp",
+            -- diagnostics = "nvim_lsp",
             offsets = {
                 {
                     filetype = "NvimTree",
