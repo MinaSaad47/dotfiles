@@ -69,8 +69,15 @@ if mason_lspconfig_status then
     enensure_installed = { "lua_ls", "rust_analyzer", "clangd" },
   }
   mason_lspconfig.setup_handlers {
-    function(server)
-      lspconfig[server].setup(opts)
+    ["clangd"] = function()
+      lspconfig.clangd.setup {
+        cmd = {
+          "clangd",
+          "--fallback-style",
+          "~/.config/.clang-format",
+        },
+        capabilities = capabilities,
+      }
     end,
 
     ["lua_ls"] = function()
@@ -90,8 +97,12 @@ if mason_lspconfig_status then
               enable = false,
             },
           },
+          capabilities = capabilities,
         },
       }
+    end,
+    function(server)
+      lspconfig[server].setup(opts)
     end,
   }
 end
