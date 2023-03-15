@@ -1,8 +1,12 @@
 return {
+  cond = function()
+    return not vim.g.vscode
+  end,
   "nvim-lualine/lualine.nvim", -- language server
   opts = {
     options = {
-      theme = "gruvbox",
+      component_separators = "",
+      section_separators = "",
     },
   },
 }

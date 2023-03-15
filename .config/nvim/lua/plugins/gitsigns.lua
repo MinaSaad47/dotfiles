@@ -1,4 +1,7 @@
 return {
+  cond = function()
+    return vim.fn.vscode == nil
+  end,
   "lewis6991/gitsigns.nvim",
   opts = {
 

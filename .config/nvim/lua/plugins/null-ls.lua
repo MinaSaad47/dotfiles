@@ -1,6 +1,11 @@
 return {
+  cond = function()
+    return not vim.g.vscode
+  end,
   "jose-elias-alvarez/null-ls.nvim",
-
+  dependencies = {
+    "neovim/nvim-lspconfig",
+  },
   config = function()
     local null_ls = require "null-ls"
     local lsp_formatting = function(bufnr)
@@ -36,6 +41,11 @@ return {
       sources = {
         formatting.stylua,
         formatting.jq,
+        formatting.clang_format.with {
+          extra_args = {
+            [[-style=file:/home/ms47/.config/.clang-format]],
+          },
+        },
         formatting.prettierd,
         diagnostics.eslint_d,
       },
