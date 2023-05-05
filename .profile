@@ -61,6 +61,8 @@ if [ -d $NPM_PACKAGES ]; then
     export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 fi
 
+export CHROME_EXECUTABLE=$HOME/.nix-profile/bin/chromium
+
 # nvim editor
 export EDITOR=nvim
 export VISUAL=nvim

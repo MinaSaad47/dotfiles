@@ -7,12 +7,7 @@ return {
     undercurl = true,
     underline = true,
     bold = true,
-    italic = {
-      string = true,
-      operators = true,
-      comments = true,
-      folds = true,
-    },
+    italic = true,
     strikethrough = true,
     invert_selection = false,
     invert_signs = false,
