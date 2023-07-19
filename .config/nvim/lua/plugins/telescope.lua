@@ -1,11 +1,3 @@
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
-map("n", "<leader>ff", "<CMD>Telescope find_files <CR>", opts)
-map("n", "<leader>fg", "<CMD>Telescope grep_string <CR>", opts)
-map("n", "<leader>fb", "<CMD>Telescope buffers <CR>", opts)
-map("n", "<leader>fr", "<CMD>Telescope registers <CR>", opts)
-
 return {
   cond = function()
     return not vim.g.vscode
@@ -14,4 +6,10 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   config = true,
   cmd = "Telescope",
+  keys = {
+    { "<leader>tf", mode = { "n", "x", "o" }, "<CMD>Telescope find_files <CR>", desc = "Telescope find files" },
+    { "<leader>tg", mode = { "n", "x", "o" }, "<CMD>Telescope grep_string <CR>", desc = "Telescope grep string" },
+    { "<leader>tb", mode = { "n", "x", "o" }, "<CMD>Telescope buffers <CR>", desc = "Telescope buffers" },
+    { "<leader>tr", mode = { "n", "x", "o" }, "<CMD>Telescope registers <CR>", desc = "Telescope registers" },
+  },
 }

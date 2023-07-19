@@ -4,7 +4,6 @@ set.expandtab = true
 set.shiftwidth = 4
 set.smarttab = true
 set.tabstop = 4
-
 set.hlsearch = true
 set.incsearch = true
 set.ignorecase = true
@@ -26,4 +25,4 @@ set.cmdheight = 1
 set.laststatus = 3
 
 set.mouse = "a"
-set.clipboard = "unnamedplus"
+set.clipboard = set.clipboard + "unnamedplus"

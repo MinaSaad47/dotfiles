@@ -9,7 +9,9 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
-    "L3MON4D3/LuaSnip",
+    { "L3MON4D3/LuaSnip", dependencies = {
+      "rafamadriz/friendly-snippets",
+    } },
   },
   event = "InsertEnter",
   config = function()
@@ -128,5 +130,9 @@ return {
         native_menu = false,
       },
     }
+
+    luasnip.filetype_extend("markdown", { "html" })
+
+    require("luasnip.loaders.from_vscode").lazy_load()
   end,
 }

@@ -3,20 +3,26 @@ export LANG=en_US.UTF-8
 
 export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+
 if [ -d $HOME/.local/share/flatpak/exports/bin/ ]; then
-    export PATH="$PATH:$HOME/.local/share/flatpak/exports/bin"
+    export PATH="$HOME/.local/share/flatpak/exports/bin:$PATH"
+fi
+
+if [ -d $HOME/.local/share/nvim/mason/bin ]; then
+    export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 fi
 
 if [ -d $HOME/.local/bin ]; then
-	export PATH="$PATH:$HOME/.local/bin"
+	export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [ -d $HOME/.local/cross/bin ]; then
-	export PATH="$PATH:$HOME/.local/cross/bin"
+	export PATH="$HOME/.local/cross/bin:$PATH"
 fi
 
 if [ -d $HOME/bin ]; then
-	export PATH="$PATH:$HOME/bin"
+	export PATH="$HOME/bin:$PATH"
 fi
 
 if [ -d $HOME/.local/share/scripts ]; then
@@ -59,6 +65,14 @@ if [ -d $NPM_PACKAGES ]; then
     export PATH="$PATH:$NPM_PACKAGES/bin"
     # export MANPATH="$(manpath):$NPM_PACKAGES/share/man"
     export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+fi
+
+if [ -d $HOME/.local/opt/libtorch ]; then
+    export LIBTORCH="$HOME/.local/opt/libtorch"
+    export LD_LIBRARY_PATH="$LIBTORCH/lib:$LD_LIBRARY_PATH"
+    export LIBTORCH_INCLUDE="$LIBTORCH/"
+    export LIBTORCH_LIB="$LIBTORCH/"
+    export TORCH_CUDA_VERSION="cu118"
 fi
 
 export CHROME_EXECUTABLE=$HOME/.nix-profile/bin/chromium
