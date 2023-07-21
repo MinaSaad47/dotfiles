@@ -7,4 +7,3 @@ end
 source $HOME/.config/aliases
 command -v zoxide >/dev/null && zoxide init fish | source
 command -v starship >/dev/null && starship init fish | source
-command -v afetch >/dev/null && afetch

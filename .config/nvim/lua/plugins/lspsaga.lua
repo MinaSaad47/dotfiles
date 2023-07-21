@@ -50,17 +50,16 @@ return {
     keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
     keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
     keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
+    keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
+    keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+    keymap("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", { silent = true })
+    keymap("n", "<A-g>", "<cmd>Lspsaga term_toggle lazygit<CR>", { silent = true })
     keymap("n", "[E", function()
       require("lspsaga.diagnostic").goto_prev { severity = vim.diagnostic.severity.ERROR }
     end, { silent = true })
     keymap("n", "]E", function()
       require("lspsaga.diagnostic").goto_next { severity = vim.diagnostic.severity.ERROR }
     end, { silent = true })
-    keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
-    keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-    keymap("n", "<A-t>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
-    keymap("n", "<A-g>", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
-    keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
   end,
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
