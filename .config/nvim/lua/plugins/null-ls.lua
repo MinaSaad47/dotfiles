@@ -42,7 +42,6 @@ return {
         formatting.stylua,
         formatting.jq,
         formatting.prettierd,
-        diagnostics.eslint_d,
       },
       on_attach = on_attach,
     }

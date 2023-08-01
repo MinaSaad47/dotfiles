@@ -22,7 +22,7 @@ return {
       inverse = false,
       contrast = "hard",
       dim_inactive = false,
-      transparent_mode = true,
+      transparent_mode = false,
     },
     config = function(_, opts)
       require("gruvbox").setup(opts)

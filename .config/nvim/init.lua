@@ -19,3 +19,5 @@ require "settings"
 if not vim.g.vscode then
   require "keymaps"
 end
+
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })

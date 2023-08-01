@@ -11,13 +11,17 @@ return {
   end,
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason.nvim",
+    { "williamboman/mason.nvim", opts = {
+      ui = {
+        border = "rounded",
+      },
+    } },
     "williamboman/mason-lspconfig.nvim",
     { "j-hui/fidget.nvim", config = true },
     {
       "ray-x/lsp_signature.nvim",
       config = function()
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "None", bold = true, italic = true, blend = 100 })
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "None", bold = true, italic = true, blend = 100 })
 
         local lsp_signature = require "lsp_signature"
 

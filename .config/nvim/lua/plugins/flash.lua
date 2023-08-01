@@ -1,4 +1,7 @@
 return {
+  cond = function()
+    return not vim.g.vscode
+  end,
   "folke/flash.nvim",
   event = "VeryLazy",
   opts = {},

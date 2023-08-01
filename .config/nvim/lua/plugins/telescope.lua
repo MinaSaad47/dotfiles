@@ -4,7 +4,14 @@ return {
   end,
   "nvim-telescope/telescope.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
-  config = true,
+  config = function(_, opts)
+    require("telescope").setup(opts)
+
+    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { link = "FloatBorder" })
+    vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "FloatBorder" })
+    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { link = "FloatBorder" })
+    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { link = "FloatBorder" })
+  end,
   cmd = "Telescope",
   keys = {
     { "<leader>tf", mode = { "n", "x", "o" }, "<CMD>Telescope find_files <CR>", desc = "Telescope find files" },

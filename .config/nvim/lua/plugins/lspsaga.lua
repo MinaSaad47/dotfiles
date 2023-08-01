@@ -25,20 +25,6 @@ return {
       },
       ui = {
         border = "rounded",
-        colors = {
-          normal_bg = "#1D2021",
-          title_bg = "#afd700",
-          red = "#e95678",
-          magenta = "#b33076",
-          orange = "#FF8700",
-          yellow = "#f7bb3b",
-          green = "#afd700",
-          cyan = "#36d0e0",
-          blue = "#61afef",
-          purple = "#CBA6F7",
-          white = "#d1d4cf",
-          black = "#1c1c19",
-        },
       },
     }
     local keymap = vim.keymap.set
